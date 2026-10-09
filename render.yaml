@@ -1,0 +1,19 @@
+# ==========================================================================
+# Blueprint de deploy automático no Render (https://render.com)
+# Ao conectar o repositório, escolha "Blueprint" e o Render cria o site
+# estático com estas configurações — sem preencher nada à mão.
+# ==========================================================================
+services:
+  - type: web
+    name: consulta-mais-cnpj
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    pullRequestPreviewsEnabled: true
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
